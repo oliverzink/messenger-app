@@ -16,33 +16,33 @@ export async function POST(
         } = body;
 
         if (!currentUser?.id || !currentUser?.email) {
-            return new NextResponse('Unauthorized', { status: 401 })
+            return new NextResponse('Unauthorized', { status: 401 });
         }
-        if (isGroup &&(!members || members.length < 2 || !name)) {
-            return new NextResponse('Invalid data', { status: 400 })
+        if (isGroup && (!members || members.length < 2 || !name)) {
+            return new NextResponse('Invalid data', { status: 400 });
         }
 
         if (isGroup){
             const newConversation = await prisma.conversation.create({
                 data: {
-									name,
-									isGroup,
-									users: {
-											connect: [
-													...members.map((member: {value: string}) => ({
-															id: member.value
-													})),
-													{
-															id: currentUser.id
-													}
-											]
-									}
-							},
-							include: {
-									users: true
-            }
-          });
-					return NextResponse.json(newConversation);
+					name,
+					isGroup,
+					users: {
+						connect: [
+							...members.map((member: {value: string}) => ({
+								id: member.value
+							})),
+							{
+								id: currentUser.id
+							}
+						]
+					}
+			},
+			include: {
+				users: true
+		}		
+		});
+			return NextResponse.json(newConversation);
         }
 			
 			const existingConversations = await prisma.conversation.findMany({
@@ -60,7 +60,7 @@ export async function POST(
 					}
 				]
 			}
-		})
+		});
 
 		const singleConversation = existingConversations[0];
 
@@ -89,6 +89,6 @@ export async function POST(
 		return NextResponse.json(newConversation);
 
     } catch ( error: any) {
-        return new NextResponse('Inernal Error', { status: 500 })
+        return new NextResponse('Internal Error', { status: 500 });
     }
 }

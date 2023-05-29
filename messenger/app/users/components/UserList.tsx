@@ -3,7 +3,7 @@ import { User } from "@prisma/client";
 import UserBox from "./UserBox";
 
 interface UserListProps {
-    items: User[];
+    items: User[]
 };
 
 const UserList: React.FC<UserListProps> = ({
