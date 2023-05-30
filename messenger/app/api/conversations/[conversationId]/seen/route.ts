@@ -27,10 +27,11 @@ export async function POST(
             include: {
                 messages: {
                     include: {
-                        // seen: true,
+                        seen: true,
                     }
                 }
             },
+        
             // users: true
         });
 
@@ -51,14 +52,14 @@ export async function POST(
             },
             include: {
                 sender: true,
-                // seen: true
+                seen: true
             },
             data: {
-                // seen: {
-                //     connect: {
-                //         id: currentUser.id
-                //     }
-                // }
+                seen: {
+                    connect: {
+                        id: currentUser.id
+                    }
+                }
             }
         });
         return NextResponse.json(updatedMessage);

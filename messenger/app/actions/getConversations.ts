@@ -20,13 +20,13 @@ const getConversations = async () => {
       },
       include: {
         users: true,
-        messages: true,
-        // messages: {
-        //   include: {
-        //     sender: true,
-        //     seen: true
-        //   }
-        // },
+        // messages: true,
+        messages: {
+          include: {
+            sender: true,
+            seen: true
+          }
+        },
       }
     });
     console.log(conversations);

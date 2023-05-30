@@ -32,16 +32,16 @@ export async function POST(
                         id: currentUser.id
                     }
                 },
-                // seen: {
-                //     connect: {
-                //         id: currentUser.id
-                //     }
-                // }
+                seen: {
+                    connect: {
+                        id: currentUser.id
+                    }
+                }
+            },
+            include: {
+                seen: true,
+                sender: true
             }
-            // include: {
-            //     seen: true,
-            //     sender: true
-            // }
         });
 
         const updatedConversation = await prisma.conversation.update({
@@ -56,14 +56,14 @@ export async function POST(
                     }
                 }
             },
-            // include: {
-            //     users: true,
-            //     messages: {
-            //         include: {
-            //             seen: true
-            //         }
-            //     }
-            // }
+            include: {
+                users: true,
+                messages: {
+                    include: {
+                        seen: true
+                    }
+                }
+            }
         });
         return NextResponse.json(newMessage);
     } catch (error: any) {
