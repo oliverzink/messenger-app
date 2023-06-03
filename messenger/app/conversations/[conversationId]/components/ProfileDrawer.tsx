@@ -9,6 +9,7 @@ import Avatar from "@/app/components/Avatar";
 import { useState } from "react";
 import ConfirmModal from "./ConfirmModel";
 import AvatarGroup from "@/app/components/AvatarGroup";
+import useActiveList from "@/app/hooks/useActiveList";
 
 interface ProfileDrawerProps {
     isOpen: boolean;
@@ -25,6 +26,8 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
 }) => {
     const otherUser = useOtherUser(data);
     const[confirmOpen, setConfirmOpen] = useState(false);
+    const { members } = useActiveList();
+    const isActive = members.indexOf(otherUser?.email!) !== -1;
 
     const joinedDate = useMemo(() => {
         return format(new Date(otherUser.createdAt), 'PP')
@@ -38,9 +41,9 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
         if (data.isGroup) {
             return `${data.users.length} members`;
         }
-        return 'Active';
+        return isActive ? 'Active' : 'Offline';
 
-    }, [data]);
+    }, [data, isActive]);
 
     return ( 
         <>
@@ -232,7 +235,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                             sm:px-6
                                                         "
                                                     >
-                                                        {data.isGroup && (
+                                                        {/* {data.isGroup && (
                                                             <div>
                                                                 <dt
                                                                     className="
@@ -281,7 +284,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                                     {otherUser.email}
                                                                 </dd>
                                                             </div>
-                                                        )}
+                                                        )} */}
                                                         {!data.isGroup && (
                                                             <>
                                                                 <hr />
