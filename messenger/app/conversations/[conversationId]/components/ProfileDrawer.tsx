@@ -285,7 +285,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                                 </dd>
                                                             </div>
                                                         )} */}
-                                                        {!data.isGroup && (
+<!--                                                         {!data.isGroup && (
                                                             <>
                                                                 <hr />
                                                                 <div>
@@ -309,12 +309,12 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                                         "
                                                                     >
                                                                         <time dateTime={joinedDate}>
-                                                                            {joinedDate}
-                                                                        </time>
-                                                                    </dd>
+//                                                                             {joinedDate}
+                                                                        </time> -->
+<!--                                                                     </dd>
                                                                 </div>
                                                             </>
-                                                        )}
+                                                        )} -->
                                                     </dl>
                                                 </div>
                                             </div>
